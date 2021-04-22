@@ -1,6 +1,6 @@
 class my_data():
-    def __init__(self):
-        self.data={'year':int(input('Enter the year: ')),'month':int(input('Enter the month: ')),'day':int(input('Enter the day: '))}
+    def __init__(self, date):
+        self.data=date
 
     def isValidData(self):
         if 1<=self.data['year']<=9999 and 1<=self.data['month']<=12 and 1<=self.data['day']<=30:
@@ -36,7 +36,7 @@ class my_data():
         if d<=0:
             d += 30
             m -= 1
-        if m <= 0:
+        if m <=0:
             m += 12
             y -= 1
         return str(y) + '/' + str(m) + '/' + str(d)
@@ -52,17 +52,3 @@ class my_data():
         return str(self.data['year'])+'/'+str(self.data['month'])+'/'+str(self.data['day'])
 
 
-print('date1')
-obj=my_data()
-
-print('isvalid:',obj.isValidData())
-print(obj.show(obj.data))
-
-print('sum of two dates: ',obj.add_data())
-
-print('Name of the desired month: ',obj.getMonthName())
-
-print('Subtraction of two dates: ',obj.sub_data())
-print(obj.show(obj.data2))
-
-print(obj.isLeapyear())
