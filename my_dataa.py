@@ -1,9 +1,11 @@
 class my_data():
-    def __init__(self, date):
-        self.data=date
+    def __init__(self, y=None,m=None,d=None):
+        self.year=y
+        self.month=m
+        self.day=d
 
     def isValidData(self):
-        if 1<=self.data['year']<=9999 and 1<=self.data['month']<=12 and 1<=self.data['day']<=30:
+        if 1<=self.year<=9999 and 1<=self.month<=12 and 1<=self.day<=30:
             return True
         else:
             return False
@@ -15,31 +17,31 @@ class my_data():
         else:
             return False
 
-    def add_data(self):
-        self.data2 = {'year': int(input('date2:\nEnter the year: ')), 'month': int(input('Enter the month: ')), 'day': int(input('Enter the day: '))}
-        y=self.data['year']+self.data2['year']
-        m=self.data['month'] + self.data2['month']
-        d=self.data['day'] + self.data2['day']
-        if d>30:
-            d-=30
-            m+=1
-        if m>12:
-            m-=12
-            y+=1
-        return str(y)+'/'+str(m)+'/'+str(d)
+    def add_data(self,other):
+        result=my_data()
+        result.year=self.year+ other.year
+        result.month=self.month + other.month
+        result.day=self.day + other.day
+        if result.day>30:
+            result.day-=30
+            result.month+=1
+        if result.month>12:
+            result.month-=12
+            result.year+=1
+        return result
 
-    def sub_data(self):
-        self.data2 = {'year': int(input('date2:\nEnter the year: ')), 'month': int(input('Enter the month: ')), 'day': int(input('Enter the day: '))}
-        y = self.data['year'] - self.data2['year']
-        m = self.data['month'] - self.data2['month']
-        d = self.data['day'] - self.data2['day']
-        if d<=0:
-            d += 30
-            m -= 1
-        if m <=0:
-            m += 12
-            y -= 1
-        return str(y) + '/' + str(m) + '/' + str(d)
+    def sub_data(self,other):
+        result = my_data()
+        result.year = self.year - other.year
+        result.month = self.month - other.month
+        result.day = self.day - other.day
+        if result.day<=0:
+            result.day += 30
+            result.month -= 1
+        if result.month <=0:
+            result.month += 12
+            result.year -= 1
+        return result
 
 
     def getMonthName(self):
@@ -47,8 +49,7 @@ class my_data():
         self.month = {'1': 'farvardin','2':'ordibehesht','3':'khordad','4':'tir','5':'mordad','6':'shahrivar','7':'mehr','8':'aban','9':'azar','10':'dey','11':'bahman','12':'esfand'}
         return self.month[number]
 
-    def show(self,data2):
-        self.data=data2
-        return str(self.data['year'])+'/'+str(self.data['month'])+'/'+str(self.data['day'])
+    def show(self):
+        print(self.year,'/',self.month,'/',self.day)
 
 

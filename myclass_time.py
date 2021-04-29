@@ -1,64 +1,71 @@
 class my_time():
-    def __init__(self):
-        if item==1 or item==2:
-            self.time1={'hour':int(input('Time 1:\nhour : ')),'minute':int(input('Minutes : ')),'second':int(input('Seconds :'))}
-            self.time2 = {'hour': int(input('Time 2:\nhour : ')), 'minute': int(input('Minutes : ')), 'second': int(input('Seconds :'))}
+    def __init__(self,h,m,s):
+            self.hour=h
+            self.minute = m
+            self.seconds = s
 
-    def my_sum(self):
-        h=obj.time1['hour']+obj.time2['hour']
-        m=obj.time1['minute']+obj.time2['minute']
-        s=obj.time1['second']+obj.time2['second']
-        if s>60:
-            s-=60
-            m+=1
-        if m>60:
-            m-=60
-            h+=1
-        return str(h)+':'+str(m)+':'+str(s)
+    def my_sum(self,other):
+        result=my_time(None, None,None)
+        result.hour=self.hour + other.hour
+        result.minute=self.minute + other.minute
+        result.seconds=self.seconds + other.seconds
+        if result.seconds > 60:
+            result.seconds -= 60
+            result.minute+=1
+        if result.minute>60:
+            result.minute-=60
+            result.hour+=1
+        return result
 
-    def my_sub(self):
-        h = obj.time1['hour'] - obj.time2['hour']
-        m = obj.time1['minute'] - obj.time2['minute']
-        s = obj.time1['second'] - obj.time2['second']
-        if s<0:
-            s+=60
-            m-=1
-        if m<0:
-            m+=60
-            h-=1
-        return str(h)+':'+str(m)+':'+str(s)
-
-    def my_second(self):
+    def my_sub(self,other):
+        result=my_time(None, None,None)
+        result.hour = self.hour - other.hour
+        result.minute = self.minute- other.minute
+        result.seconds = self.seconds- other.seconds
+        if result.seconds<0:
+            result.seconds+=60
+            result.minute-=1
+        if result.minute<0:
+            result.minute+=60
+            result.hour-=1
+        return result
+    #
+    def my_second(self,m):
+        result = my_time(None, None, None)
         times = int(input('second:'))
-        hour = int(times / 3600)
+        result.hour = int(times / 3600)
         times = times % 3600
-        minute = int(times / 60)
-        second = int(times % 60)
-        return str(hour) + ':' + str(minute) + ':' + str(second)
+        result.minute = int(times / 60)
+        result.seconds = int(times % 60)
+        return result
+    #
+    def convert_time_seconds(self):
+        result =self.hour * 3600 +  self.minute * 60  + self.seconds
+        return result
 
-    def my_time(self):
-        hour = int(input("Time 1:\nhour : "))
-        minute = int(input("Minutes : "))
-        second = int(input("Seconds :"))
-        h = hour * 3600
-        m = minute * 60
-        r = h + m + second
-        return r
+    def show(self):
+        print(self.hour,':',self.minute, ':' ,self.seconds)
 
+hour_1=int(input('Time 1:\nhour : '))
+minutes_1=int(input('Minutes : '))
+seconds_1=int(input('Seconds :'))
+obj_1 = my_time(hour_1,minutes_1,seconds_1)
+
+hour_2=int(input('Time 2:\nhour : '))
+minutes_2=int(input('Minutes : '))
+seconds_2=int(input('Seconds :'))
+obj_2 = my_time(hour_2,minutes_2,seconds_2)
 
 while True:
     item = int(input('Time calculations:\n1 sum of two time\n2 Subtraction of two time\n3 Convert seconds to time\n4 Convert time to seconds'))
-    obj = my_time()
+
     if item == 1:
-        print('sum of two time:', obj.my_sum())
+        print('sum of two time:',obj_1.my_sum(obj_2).show())
     elif item == 2:
-
-        print('Subtraction of two time:',obj.my_sub())
-    elif item==3:
-
-        print('is time: ',obj.my_second())
+        print('Subtraction of two time:',obj_1.my_sub(obj_2).show())
+    if item==3:
+        print('is time: ',obj_1.my_second(minutes_1).show())
     elif item==4:
-
-        print('Seconds: ',obj.my_time())
+        print('Seconds: ',obj_1.convert_time_seconds())
 
 
